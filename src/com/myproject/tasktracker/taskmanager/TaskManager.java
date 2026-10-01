@@ -3,6 +3,7 @@ package com.myproject.tasktracker.taskmanager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import com.myproject.tasktracker.task.Status;
 import com.myproject.tasktracker.task.Task;
@@ -44,6 +45,18 @@ public class TaskManager {
 	public void markTaskDone(int idx) {
 		tasks.get(idx).setStatus(Status.DONE);
 		tasks.get(idx).setUpdatedAt(LocalDateTime.now());
+	}
+	
+	public List<Task> listAllTasks() {
+		return tasks;
+	}
+	
+	public List<Task> listTask(Predicate<Task> filter) {
+		return tasks.stream().filter(filter).toList();
+	}
+	
+	public void showTasksList(List<Task> list) {
+		list.stream().forEach(System.out::println);
 	}
 
 

@@ -56,5 +56,6 @@ class TaskManagerTest {
 		tm.markTaskDone(0);
 		assertEquals(Status.DONE, tm.getTask(0).getStatus());
 	}
+	
 
 }
