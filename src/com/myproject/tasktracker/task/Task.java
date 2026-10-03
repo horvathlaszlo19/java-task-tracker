@@ -17,6 +17,21 @@ public class Task {
 		this.createdAt = LocalDateTime.now();
 		this.updatedAt = createdAt;
 	}
+	
+	public Task(String id, String descreption, String create, String update, String status) {
+		this.id = Integer.valueOf(id);
+		this.descreption = descreption;
+		this.createdAt = LocalDateTime.parse(create);
+		this.updatedAt = LocalDateTime.parse(update);
+		this.status = switch(status) {
+		case "TODO": yield Status.TODO;
+		case "INPROGRES": yield Status.INPROGRES;
+		case "DONE": yield Status.DONE;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + status);
+		};
+
+	}
 
 	public String getDescreption() {
 		return descreption;
@@ -48,6 +63,11 @@ public class Task {
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
+	}
+	
+	@Override
+	public String toString() {
+		return "id=" + id + " " + descreption + " " + status;
 	}
 	
 

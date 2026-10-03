@@ -1,8 +1,12 @@
 package com.myproject.tasktracker.filehandle;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.myproject.tasktracker.task.Task;
 import com.myproject.tasktracker.taskmanager.TaskManager;
 
 public class JsonFileHandle {
@@ -29,6 +33,40 @@ public class JsonFileHandle {
 			out.write("\s]\n");
 			out.write("}");
 		}
+	}
+	
+	public TaskManager read() throws FileNotFoundException, IOException {
+		TaskManager tm = new TaskManager();
+		try(BufferedReader br = new BufferedReader(new FileReader("tasks.json"))) {
+			String line;
+			String token;
+			String[] tokens = new String[5];
+			int count = 0;
+			while((line = br.readLine()) != null) {
+				if(line.contains("{") || line.contains("tasks") || 
+				   line.contains("},") || line.contains("}") || line.contains("]")) {
+					continue;
+				}
+				
+				token = line.split(": ")[1];
+				if(token.contains(",")) {
+					token = token.split(",")[0];
+				}
+				if(token.contains("\"")) {
+					token = token.split("\"")[1];
+				}
+				tokens[count] = token;
+				count++;
+				if(count == 5) {
+					Task task = new Task(tokens[0],tokens[1],tokens[2],tokens[3],tokens[4]);
+					tm.addTask(task);
+					count = 0;
+					continue;
+				}
+				
+			}
+		}
+		return tm;
 	}
 
 }
