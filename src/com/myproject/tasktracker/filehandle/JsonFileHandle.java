@@ -14,7 +14,7 @@ public class JsonFileHandle {
 	public JsonFileHandle() {}
 	
 	public void write(TaskManager taskmanager) throws IOException {
-		try(FileWriter out = new FileWriter("tasks.json")) {
+		try(FileWriter out = new FileWriter("tasks.json", true)) {
 			out.write("{\n");
 			out.write("\s\"tasks\": [\n");
 			for(int i=0; i < taskmanager.getSize(); i++) {
