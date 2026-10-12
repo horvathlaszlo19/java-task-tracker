@@ -3,6 +3,7 @@ package com.myproject.tasktracker.taskmanager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import com.myproject.tasktracker.task.Status;
@@ -57,6 +58,11 @@ public class TaskManager {
 	
 	public void showTasksList(List<Task> list) {
 		list.stream().forEach(System.out::println);
+	}
+	
+	public Optional<Integer> getMaxId() {
+		return tasks.stream().map(Task::getId).max((t1,t2) -> Integer.compare(t1, t2));
+		
 	}
 
 

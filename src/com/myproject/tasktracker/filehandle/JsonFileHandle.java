@@ -1,6 +1,7 @@
 package com.myproject.tasktracker.filehandle;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,7 +15,7 @@ public class JsonFileHandle {
 	public JsonFileHandle() {}
 	
 	public void write(TaskManager taskmanager) throws IOException {
-		try(FileWriter out = new FileWriter("tasks.json", true)) {
+		try(FileWriter out = new FileWriter("tasks.json")) {
 			out.write("{\n");
 			out.write("\s\"tasks\": [\n");
 			for(int i=0; i < taskmanager.getSize(); i++) {
@@ -37,6 +38,8 @@ public class JsonFileHandle {
 	
 	public TaskManager read() throws FileNotFoundException, IOException {
 		TaskManager tm = new TaskManager();
+		File file = new File("tasks.json");
+		if (!file.canRead()) file.createNewFile();
 		try(BufferedReader br = new BufferedReader(new FileReader("tasks.json"))) {
 			String line;
 			String token;
