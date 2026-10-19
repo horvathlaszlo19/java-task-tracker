@@ -24,12 +24,12 @@ public class Task {
 		this.createdAt = LocalDateTime.parse(create);
 		this.updatedAt = LocalDateTime.parse(update);
 		this.status = switch(status) {
-		case "TODO": yield Status.TODO;
-		case "INPROGRES": yield Status.INPROGRES;
-		case "DONE": yield Status.DONE;
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + status);
-		};
+			case "TODO": yield Status.TODO;
+			case "INPROGRES": yield Status.INPROGRES;
+			case "DONE": yield Status.DONE;
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + status);
+			};
 
 	}
 

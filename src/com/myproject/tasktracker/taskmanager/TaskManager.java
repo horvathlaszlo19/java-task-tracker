@@ -30,7 +30,7 @@ public class TaskManager {
 	}
 	
 	public void deleteTask(int idx) {
-		tasks.remove(idx);
+		tasks.remove(getTaskIndex(idx));
 	}
 	
 	public void updateTaskDescreption(int idx, String descreption) {
@@ -63,6 +63,15 @@ public class TaskManager {
 	public Optional<Integer> getMaxId() {
 		return tasks.stream().map(Task::getId).max((t1,t2) -> Integer.compare(t1, t2));
 		
+	}
+	
+	private int getTaskIndex(int id) {
+		Task task = null;
+		for (Task t : tasks) {
+			if(t.getId() == id) task = t;
+		}
+		if(task == null) throw new IllegalArgumentException();
+		return tasks.indexOf(task);
 	}
 
 
