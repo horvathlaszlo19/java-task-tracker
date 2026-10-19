@@ -83,6 +83,8 @@ public class Main {
 		System.out.println("show-all -- Show all tasks.");
 		System.out.println("show-in-progress -- Show all tasks that are in progress.");
 		System.out.println("show-done -- Show all completed tasks.");
+		System.out.println("mark-in-progress -- Mark a task as in progress by selected ID number");
+		System.out.println("mark-done -- Mark a task as done by selected ID number");
 		System.out.println("help -- Display available commands.");
 	}
 
