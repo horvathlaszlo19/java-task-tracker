@@ -11,10 +11,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		
 		TaskManager tm;
 		JsonFileHandle fh = new JsonFileHandle();
-		//TODO Fix exception handling
 		//TODO Fix String arguments
 		try {
 			if(args.length == 0) throw new IllegalArgumentException("Command was not found.");
@@ -78,7 +76,7 @@ public class Main {
 		}
 		catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			displayHelp();
+			System.out.println("Plase use 'help' command to print available options");
 		}
 			
 		
