@@ -11,10 +11,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		
 		TaskManager tm;
 		JsonFileHandle fh = new JsonFileHandle();
-
+		//TODO Fix exception handling
+		//TODO Fix String arguments
 		try {
+			if(args.length == 0) throw new IllegalArgumentException("Command was not found.");
 			tm = fh.read();
 			if(args[0].equals("add")) {
 				StringBuilder sb = new StringBuilder();
@@ -52,6 +55,7 @@ public class Main {
 				int idx = Integer.parseInt(args[2]);
 				tm.markTaskDone(idx);
 			}
+			
 			else if(args[0].equals("update")) {
 				int idx = Integer.parseInt(args[1]);
 				StringBuilder sb = new StringBuilder();
@@ -60,6 +64,12 @@ public class Main {
 				}
 				tm.updateTaskDescreption(idx, sb.toString());
 			}
+			else if(args[0].equals("help")) {
+				displayHelp();
+			}
+			else {
+				displayHelp();
+			}
 			
 			fh.write(tm);
 			
@@ -67,14 +77,15 @@ public class Main {
 			e.printStackTrace();
 		}
 		catch (IllegalArgumentException e) {
-			System.err.println(e.getMessage());
+			System.out.println(e.getMessage());
+			displayHelp();
 		}
 			
 		
 
 	}
 	
-	private void displayHelp() {
+	private static void displayHelp() {
 		System.out.println("Available commands for the task-tracker program.");
 		System.out.println("add -- Create a new task for your to-do list. After 'add', type your task description.");
 		System.out.println("delete -- Delete a selected task by typing its ID number after the 'delete' command.");
@@ -87,5 +98,7 @@ public class Main {
 		System.out.println("mark-done -- Mark a task as done by selected ID number");
 		System.out.println("help -- Display available commands.");
 	}
+	
+	
 
 }
