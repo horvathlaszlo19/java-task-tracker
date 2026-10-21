@@ -13,17 +13,12 @@ public class Main {
 		
 		TaskManager tm;
 		JsonFileHandle fh = new JsonFileHandle();
-		//TODO Fix String arguments
+		
 		try {
 			if(args.length == 0) throw new IllegalArgumentException("Command was not found.");
 			tm = fh.read();
 			if(args[0].equals("add")) {
-				StringBuilder sb = new StringBuilder();
-				for (int i=1; i < args.length; i++) {
-					sb.append(args[i] + " ");
-					
-				}
-				
+				StringBuilder sb = getStringArgument(args);
 				int id = tm.getMaxId().orElse(0) + 1;
 				Task task = new Task(id,sb.toString());
 				tm.addTask(task);	
@@ -56,10 +51,7 @@ public class Main {
 			
 			else if(args[0].equals("update")) {
 				int idx = Integer.parseInt(args[1]);
-				StringBuilder sb = new StringBuilder();
-				for(int i=1; i < args.length; i++) {
-					sb.append(args[i] + " ");
-				}
+				StringBuilder sb = getStringArgument(args);	
 				tm.updateTaskDescreption(idx, sb.toString());
 			}
 			else if(args[0].equals("help")) {
@@ -81,6 +73,15 @@ public class Main {
 			
 		
 
+	}
+
+	private static StringBuilder getStringArgument(String[] args) {
+		StringBuilder sb = new StringBuilder();
+		for (int i=1; i < args.length; i++) {
+			sb.append(args[i] + " ");
+			
+		}
+		return sb;
 	}
 	
 	private static void displayHelp() {
