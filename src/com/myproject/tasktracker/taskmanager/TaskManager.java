@@ -34,18 +34,18 @@ public class TaskManager {
 	}
 	
 	public void updateTaskDescreption(int idx, String descreption) {
-		tasks.get(idx).setDescreption(descreption);
-		tasks.get(idx).setUpdatedAt(LocalDateTime.now());
+		tasks.get(getTaskIndex(idx)).setDescreption(descreption);
+		tasks.get(getTaskIndex(idx)).setUpdatedAt(LocalDateTime.now());
 	}
 
 	public void markTaskInprogres(int idx) {
-		tasks.get(idx).setStatus(Status.INPROGRES);
-		tasks.get(idx).setUpdatedAt(LocalDateTime.now());
+		tasks.get(getTaskIndex(idx)).setStatus(Status.INPROGRES);
+		tasks.get(getTaskIndex(idx)).setUpdatedAt(LocalDateTime.now());
 	}
 
 	public void markTaskDone(int idx) {
-		tasks.get(idx).setStatus(Status.DONE);
-		tasks.get(idx).setUpdatedAt(LocalDateTime.now());
+		tasks.get(getTaskIndex(idx)).setStatus(Status.DONE);
+		tasks.get(getTaskIndex(idx)).setUpdatedAt(LocalDateTime.now());
 	}
 	
 	public List<Task> listAllTasks() {
