@@ -21,7 +21,11 @@ public class TaskManager {
 		return tasks.size();
 	}
 	
-	public Task getTask(int id) {
+	public Task getTask(int idx) {
+		return tasks.get(idx);
+	}
+	
+	public Task getTaskById(int id) {
 		return tasks.get(getTaskIndex(id));
 	}
 	
@@ -30,23 +34,23 @@ public class TaskManager {
 	}
 	
 	public void deleteTask(int id) {
-		tasks.remove(getTaskIndex(id));
+		tasks.remove(getTaskById(id));
 	}
 	
 	public void updateTaskDescreption(int id, String descreption) {
 		if (descreption.length() == 0) throw new IllegalArgumentException("Descreption lenght cannot be 0.");
-		tasks.get(id).setDescreption(descreption);
-		tasks.get(id).setUpdatedAt(LocalDateTime.now());
+		getTaskById(id).setDescreption(descreption);
+		getTaskById(id).setUpdatedAt(LocalDateTime.now());
 	}
 
 	public void markTaskInprogres(int id) {
-		tasks.get(id).setStatus(Status.INPROGRES);
-		tasks.get(id).setUpdatedAt(LocalDateTime.now());
+		getTaskById(id).setStatus(Status.INPROGRES);
+		getTaskById(id).setUpdatedAt(LocalDateTime.now());
 	}
 
 	public void markTaskDone(int id) {
-		tasks.get(id).setStatus(Status.DONE);
-		tasks.get(id).setUpdatedAt(LocalDateTime.now());
+		getTaskById(id).setStatus(Status.DONE);
+		getTaskById(id).setUpdatedAt(LocalDateTime.now());
 	}
 	
 	public List<Task> listAllTasks() {

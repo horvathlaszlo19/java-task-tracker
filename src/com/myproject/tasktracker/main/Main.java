@@ -27,7 +27,7 @@ public class Main {
 			else if(args[0].equals("show-all")) {
 				tm.showTasksList(tm.listAllTasks());
 			}
-			else if(args[0].equals("show-in")) {
+			else if(args[0].equals("show-in-progress")) {
 				tm.showTasksList(tm.listTask(t -> t.getStatus() == Status.INPROGRES));
 			}
 			else if(args[0].equals("show-done")) {
@@ -40,17 +40,18 @@ public class Main {
 				int idx = Integer.parseInt(args[1]);
 				tm.deleteTask(idx);					
 			}
-			else if(args[0].equals("mark-in")) {
+			else if(args[0].equals("mark-in-progress")) {
 				int idx = Integer.parseInt(args[1]);
 				tm.markTaskInprogres(idx);
 			}
 			else if(args[0].equals("mark-done")) {
-				int idx = Integer.parseInt(args[2]);
+				int idx = Integer.parseInt(args[1]);
 				tm.markTaskDone(idx);
 			}
 			
 			else if(args[0].equals("update")) {
 				int idx = Integer.parseInt(args[1]);
+				args[1] = "";
 				StringBuilder sb = getStringArgument(args);	
 				tm.updateTaskDescreption(idx, sb.toString());
 			}
